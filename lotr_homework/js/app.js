@@ -120,6 +120,10 @@ const keepItSecretKeepItSafe = () => {
 const makeBaddies = () => {
 
   // 1. display an unordered list of baddies in Mordor
+  $('#' + lands[2]).append("<ul id ='baddies'></ul>");
+	for (let i = 0; i < baddies.length; i++){
+		$('#baddies').append("<li class ='baddy'>" + baddies[i] + "</li>");
+	}
 
   // 2. give each of the baddies a class of "baddy"
 
@@ -135,7 +139,11 @@ const makeBaddies = () => {
 const makeBuddies = () => {
 
   // 1. create an aside tag and append it to middle-earth below mordor
-
+      let $buddies = $('<aside> <ul id = "buddies"</ul> </aside>');
+      $('#middle-earth').append($buddies);
+      for(let i = 0; i < buddies.length; i ++){
+        $('#buddies').append('<li class = "buddy">' + buddies[i] + '</li>');
+      }
   // 2. display an unordered list of buddies in the aside
 
   // 3. give each of the buddies a class of "buddy"
@@ -151,7 +159,7 @@ const makeBuddies = () => {
 const leaveTheShire = () => {
 
   // 1. grab the hobbits (the ul in which they reside) and move them to Rivendell
-
+$("#" + lands[0]).children("ul").detach().appendTo("#" + lands[1]);
   // hint: the hobbits ul is a childNode of The-Shire-- there is way to get a list of childNodes
 
 };
@@ -165,7 +173,7 @@ const leaveTheShire = () => {
 const beautifulStranger = () => {
 
   // 1. change the buddy 'Strider' textnode to "Aragorn"
-
+$("aside.buddy:contains('Strider')").text("Aragorn");
   // hint: You can get a list of elements by tag name, such as 'aside'
 
 };
@@ -179,7 +187,12 @@ const beautifulStranger = () => {
 const forgeTheFellowShip = () => {
 
   // 1. create a new div with an id 'the-fellowship'
-
+  
+    const $fellers = $('<div id ="the-fellowship"></div>');
+    $fellers.html('<h1>The FellowShip</h1>');
+    $('#middle-earth').append($fellers);
+    $('#Rivendell').children('ul').detach().appendTo($fellers);
+    $('aside').detach().appendTo($fellers);
   // 2. add an h1 with the text 'The Fellowship' to this new div
 
   // 3. append the fellowship to middle-earth
@@ -197,7 +210,8 @@ const forgeTheFellowShip = () => {
 const theBalrog = () => {
 
   // 1. change the 'Gandalf' textNode to 'Gandalf the White'
-
+  $('aside.buddy:contains("Gandalf the Grey")').text('Gandalf the White');
+  $('aside.buddy:contains("Gandalf the White")').attr('class', 'the-white');
   // 2. add a class "the-white" to this element
 
   // 3. in the style.css file, add a css rule to make elements of the class "the-white" have a white background and a grey border
@@ -213,7 +227,10 @@ const theBalrog = () => {
 const hornOfGondor = () => {
 
   // 1. create a pop-up alert that the horn of gondor has been blown
-
+  alert("The horn of gondor has been blown");
+  $(' .buddy:contains("Boromir")').css('text-decoration', 'line-through');
+  $('.baddy:contains("The Uruk-hai")').remove();
+  
   // 2. Boromir's been killed by the Uruk-hai! Put a linethrough on Boromir's name
 
   // 3. Tricky: Remove the Uruk-Hai from the Baddies on the page
@@ -229,7 +246,9 @@ const hornOfGondor = () => {
 const itsDangerousToGoAlone = () => {
 
   // 1. take Frodo and Sam out of the fellowship and move them to Mordor (they don't need to be inside a ul in Mordor)
-
+  $('.hobbit:contains("Frodo Baggins")').detach().appendTo('#Mordor');
+  $('.hobbit:contains("Samwise \'Sam\' Gamgee")').detach().appendTo('#Mordor');
+  $('#Mordor').append("<div id ='mount-doom'></div>");
   // 2. add a div with an id of 'mount-doom' to Mordor
 
 };
@@ -243,7 +262,10 @@ const itsDangerousToGoAlone = () => {
 const weWantsIt = () => {
 
   // 1. Create a div with an id of 'gollum' and add it to Mordor
-
+  $('#Mordor').append('<div id ="gollum"></div>');
+  $('#the-ring').detach().appendTo('#gollum');
+  $('#golllum').detach().appendTo('#mount-doom');
+  
   // 2. Move the ring from Frodo and give it to Gollum
 
   // 3. Move Gollum into Mount Doom
@@ -257,7 +279,9 @@ const weWantsIt = () => {
 // Chapter 13
 // ============
 const thereAndBackAgain = () => {
-
+  $('#gollum').remove();
+  $('.baddy').remove();
+  $('.hobbit').detach().appendTo('#The-Shire');
   // 1. remove Gollum and the Ring from the DOM
 
   // 2. remove all the baddies from the DOM
